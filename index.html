@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Golf Rota 2027</title>
+  <meta name="description" content="Countdown zur Golf-Trainingsreise nach Rota, Spanien – März 2027">
+  <meta name="theme-color" content="#0f3d2e">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛳</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-900: #0b2e22;
+      --green-800: #0f3d2e;
+      --green-600: #1d6b4f;
+      --sand: #f3e6c8;
+      --sun: #f2a93b;
+      --terracotta: #c8553d;
+      --white: #fffaf0;
+      --muted: rgba(255, 250, 240, .72);
+      --card: rgba(255, 250, 240, .08);
+      --card-border: rgba(255, 250, 240, .16);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { min-height: 100%; background: var(--green-900); }
+    body { min-height: 100vh; }
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 85% -10%, rgba(242, 169, 59, .55) 0, rgba(242, 169, 59, 0) 40%),
+        radial-gradient(circle at 0% 100%, rgba(200, 85, 61, .35) 0, rgba(200, 85, 61, 0) 45%),
+        linear-gradient(160deg, var(--green-800) 0%, var(--green-900) 100%);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 48px 16px 64px; }
+
+    header { text-align: center; }
+    .eyebrow {
+      display: inline-flex; gap: .5em; align-items: center;
+      font-size: .8rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--sun);
+      padding: .4em 1em; border: 1px solid rgba(242, 169, 59, .4); border-radius: 999px;
+    }
+    h1 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(2.6rem, 9vw, 5.5rem);
+      line-height: 1;
+      margin: 24px 0 12px;
+      letter-spacing: -.02em;
+    }
+    h1 .accent { color: var(--sun); }
+    .subtitle { color: var(--muted); font-size: clamp(1rem, 2.6vw, 1.2rem); }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 48px auto 16px;
+      max-width: 720px;
+    }
+    .unit {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 20px 8px 16px;
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
+    .num {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 8vw, 4rem);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .label {
+      margin-top: 8px;
+      font-size: .75rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .departure { text-align: center; color: var(--muted); font-size: .95rem; }
+    .departure strong { color: var(--white); }
+
+    .arrived {
+      display: none;
+      text-align: center;
+      margin: 48px auto 16px;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      color: var(--sun);
+    }
+    body.is-live .countdown, body.is-live .departure { display: none; }
+    body.is-live .arrived { display: block; }
+
+    .progress {
+      max-width: 720px; margin: 28px auto 0;
+    }
+    .track {
+      position: relative; height: 10px; border-radius: 999px;
+      background: rgba(255, 250, 240, .12);
+    }
+    .fill {
+      position: absolute; inset: 0 auto 0 0; width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--sand), var(--sun));
+      transition: width .6s ease;
+    }
+    .ball {
+      position: absolute; top: 50%; left: 0%;
+      width: 22px; height: 22px; margin: -11px 0 0 -11px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff 0, #e9e4d8 70%);
+      box-shadow: 0 2px 6px rgba(0,0,0,.35);
+      transition: left .6s ease;
+    }
+    .flag { position: absolute; right: -4px; top: -30px; font-size: 1.4rem; }
+    .progress-meta {
+      display: flex; justify-content: space-between; margin-top: 10px;
+      font-size: .8rem; color: var(--muted);
+    }
+
+    section { margin-top: 72px; }
+    h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .groups { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .group {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .group::after {
+      content: ""; position: absolute; right: -40px; bottom: -40px;
+      width: 140px; height: 140px; border-radius: 50%;
+      background: rgba(242, 169, 59, .12);
+    }
+    .group.two::after { background: rgba(200, 85, 61, .18); }
+    .tag {
+      display: inline-block; font-size: .72rem; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: .3em .8em; border-radius: 999px;
+      background: var(--sun); color: var(--green-900);
+    }
+    .group.two .tag { background: var(--terracotta); color: var(--white); }
+    .group h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.5rem; margin: 14px 0 4px;
+    }
+    .group .dates { color: var(--muted); }
+    .group .mini {
+      margin-top: 16px; font-weight: 600; font-variant-numeric: tabular-nums;
+      position: relative; z-index: 1;
+    }
+
+    .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .fact {
+      text-align: center; padding: 20px 12px;
+      border-top: 2px solid rgba(242, 169, 59, .5);
+    }
+    .fact .icon { font-size: 1.8rem; }
+    .fact .value { font-family: "Fraunces", Georgia, serif; font-size: 1.3rem; margin-top: 6px; }
+    .fact .desc { color: var(--muted); font-size: .9rem; }
+
+    footer {
+      margin-top: 72px; text-align: center; color: var(--muted); font-size: .85rem;
+    }
+    footer .note { margin-top: 6px; font-size: .78rem; opacity: .8; }
+
+    @media (max-width: 640px) {
+      .wrap { padding-top: 32px; }
+      .countdown { gap: 8px; }
+      .unit { border-radius: 14px; padding: 14px 4px 12px; }
+      .label { font-size: .62rem; letter-spacing: .08em; }
+      .groups { grid-template-columns: 1fr; }
+      .facts { grid-template-columns: 1fr; gap: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fill, .ball { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <span class="eyebrow">⛳ Golf-Trainingsreise 2027</span>
+      <h1>Rota <span class="accent">ruft.</span></h1>
+      <p class="subtitle">Andalusien · Costa de la Luz · Spanien</p>
+    </header>
+
+    <div class="countdown" id="countdown" aria-live="polite">
+      <div class="unit"><div class="num" id="d">–</div><div class="label">Tage</div></div>
+      <div class="unit"><div class="num" id="h">–</div><div class="label">Stunden</div></div>
+      <div class="unit"><div class="num" id="m">–</div><div class="label">Minuten</div></div>
+      <div class="unit"><div class="num" id="s">–</div><div class="label">Sekunden</div></div>
+    </div>
+    <p class="departure">Abreise <strong>Sonntag, 7. März 2027</strong> · ca. 15:00 Uhr <span style="opacity:.7">(vorläufig)</span></p>
+    <p class="arrived" id="arrived">¡Vamos! Wir sind unterwegs nach Rota ☀️</p>
+
+    <div class="progress" aria-hidden="true">
+      <div class="track">
+        <div class="fill" id="fill"></div>
+        <div class="ball" id="ball"></div>
+        <span class="flag">⛳</span>
+      </div>
+      <div class="progress-meta"><span>Tee</span><span id="pct">0 %</span><span>Grün</span></div>
+    </div>
+
+    <section>
+      <h2>Zwei Gruppen, zwei Wochen</h2>
+      <div class="groups">
+        <article class="group one">
+          <span class="tag">Woche 1</span>
+          <h3>Gruppe 1</h3>
+          <p class="dates">7. – 14. März 2027</p>
+          <p class="mini" id="g1"></p>
+        </article>
+        <article class="group two">
+          <span class="tag">Woche 2</span>
+          <h3>Gruppe 2</h3>
+          <p class="dates">14. – 21. März 2027</p>
+          <p class="mini" id="g2"></p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Das Ziel</h2>
+      <div class="facts">
+        <div class="fact"><div class="icon">📍</div><div class="value">Rota, Cádiz</div><div class="desc">Atlantikküste Andalusiens</div></div>
+        <div class="fact"><div class="icon">🏌️</div><div class="value">Trainingsreise</div><div class="desc">Schwung schärfen, Runden spielen</div></div>
+        <div class="fact"><div class="icon">☀️</div><div class="value">~ 19 °C</div><div class="desc">typisches Tageshoch im März</div></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Bis bald auf dem Platz. ¡Buen golf!</p>
+      <p class="note">Zeiten in deutscher Zeit (MEZ). Abfahrtszeit noch vorläufig.</p>
+    </footer>
+  </main>
+
+  <script>
+    // Abreise: 7. März 2027, 15:00 MEZ (UTC+1)
+    const DEPARTURE = new Date("2027-03-07T15:00:00+01:00");
+    const GROUP2 = new Date("2027-03-14T15:00:00+01:00");
+    const RETURN = new Date("2027-03-21T15:00:00+01:00");
+    // Startpunkt für den Fortschrittsbalken
+    const START = new Date("2026-11-21T00:00:00+01:00");
+
+    const $ = (id) => document.getElementById(id);
+    const pad = (n) => String(n).padStart(2, "0");
+
+    function split(ms) {
+      const t = Math.max(0, Math.floor(ms / 1000));
+      return { d: Math.floor(t / 86400), h: Math.floor(t / 3600) % 24, m: Math.floor(t / 60) % 60, s: t % 60 };
+    }
+
+    function groupText(target, end, now) {
+      if (now >= end) return "Erledigt – hoffentlich mit Birdies 🐦";
+      if (now >= target) return "Läuft gerade! ⛳";
+      const { d, h } = split(target - now);
+      return d > 0 ? `Noch ${d} ${d === 1 ? "Tag" : "Tage"} und ${h} Std.` : `Noch ${h} Std. – Koffer packen!`;
+    }
+
+    function tick() {
+      const now = new Date();
+      const diff = DEPARTURE - now;
+
+      if (diff <= 0) {
+        document.body.classList.add("is-live");
+      } else {
+        const { d, h, m, s } = split(diff);
+        $("d").textContent = d;
+        $("h").textContent = pad(h);
+        $("m").textContent = pad(m);
+        $("s").textContent = pad(s);
+      }
+
+      const pct = Math.min(100, Math.max(0, ((now - START) / (DEPARTURE - START)) * 100));
+      $("fill").style.width = pct + "%";
+      $("ball").style.left = pct + "%";
+      $("pct").textContent = pct.toFixed(pct < 10 ? 1 : 0) + " %";
+
+      $("g1").textContent = groupText(DEPARTURE, GROUP2, now);
+      $("g2").textContent = groupText(GROUP2, RETURN, now);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>
